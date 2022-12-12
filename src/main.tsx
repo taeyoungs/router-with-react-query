@@ -6,27 +6,49 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Root, { loader as rootLoader } from './routes/Root';
 import './index.css';
 
-// Start the mocking conditionally.
-if (process.env.NODE_ENV === 'development') {
-  const { worker } = require('./mocks/browser');
-  worker.start();
-}
-
 const queryClient = new QueryClient();
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Root />,
-    loader: rootLoader(queryClient),
-  },
-]);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
-  </React.StrictMode>
-);
+// Start the mocking conditionally.
+if (process.env.NODE_ENV === 'development') {
+  import('../src/mocks/browser')
+    .then(({ worker }) => {
+      worker.start();
+    })
+    .then(() => {
+      const router = createBrowserRouter([
+        {
+          path: '/',
+          element: <Root />,
+          loader: rootLoader(queryClient),
+        },
+      ]);
+
+      root.render(
+        <React.StrictMode>
+          <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} />
+            <ReactQueryDevtools initialIsOpen={false} />
+          </QueryClientProvider>
+        </React.StrictMode>
+      );
+    });
+} else {
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Root />,
+      loader: rootLoader(queryClient),
+    },
+  ]);
+
+  root.render(
+    <React.StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </React.StrictMode>
+  );
+}
