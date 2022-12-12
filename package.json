@@ -26,5 +26,8 @@
     "typescript": "^4.6.4",
     "vite": "^3.2.3"
   },
-  "packageManager": "yarn@3.3.0"
+  "packageManager": "yarn@3.3.0",
+  "msw": {
+    "workerDirectory": "public"
+  }
 }
