@@ -561,6 +561,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/sort-by@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@types/sort-by@npm:1.2.0"
+  checksum: 1865ae3786ad6eb4cb2bd6756f626891828a78d9cbaee54f25ee7fb79061fef5452933ca18f1525929775f0ef830f2299101e470dac737d712387e35a69df277
+  languageName: node
+  linkType: hard
+
 "@vitejs/plugin-react@npm:^2.2.0":
   version: 2.2.0
   resolution: "@vitejs/plugin-react@npm:2.2.0"
@@ -2460,6 +2467,7 @@ __metadata:
     "@tanstack/react-query": ^4.18.0
     "@types/react": ^18.0.24
     "@types/react-dom": ^18.0.8
+    "@types/sort-by": ^1.2.0
     "@vitejs/plugin-react": ^2.2.0
     msw: ^0.49.1
     react: ^18.2.0
